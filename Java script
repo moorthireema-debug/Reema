@@ -1,0 +1,493 @@
+JavaScript Interactive Examples
+
+I'll create an interactive webpage that demonstrates JavaScript fundamentals with practical examples.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Interactive Examples</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 50%, #fdbb2d 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .section {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        h2 {
+            color: #1a2a6c;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        h3 {
+            color: #b21f1f;
+            margin: 20px 0 10px;
+        }
+        
+        .code-example {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .interactive-demo {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #fdbb2d;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 100%);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            border-color: #1a2a6c;
+            outline: none;
+        }
+        
+        .output {
+            background: #eef7ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-weight: 600;
+            min-height: 50px;
+        }
+        
+        .color-box {
+            width: 100%;
+            height: 100px;
+            border-radius: 8px;
+            margin: 15px 0;
+            transition: background-color 0.5s;
+        }
+        
+        .todo-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+        
+        .todo-list li {
+            padding: 10px 15px;
+            background: #f0f7ff;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .todo-list li button {
+            background: #b21f1f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            header h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fab fa-js"></i> JavaScript Interactive Examples</h1>
+            <p>Learn JavaScript fundamentals through practical examples</p>
+        </header>
+        
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-variables"></i> Variables & Data Types</h2>
+                
+                <div class="interactive-demo">
+                    <h3>Variable Declaration</h3>
+                    <div class="input-group">
+                        <label for="varInput">Enter a value:</label>
+                        <input type="text" id="varInput" placeholder="Enter any value">
+                    </div>
+                    <button class="btn" onclick="showVariableType()">Check Data Type</button>
+                    <div class="output" id="varOutput">Result will appear here</div>
+                </div>
+                
+                <div class="code-example">
+                    // JavaScript variables<br>
+                    let message = "Hello World";<br>
+                    const pi = 3.14159;<br>
+                    var count = 10;<br><br>
+                    
+                    // Data types<br>
+                    let stringVar = "Text";<br>
+                    let numberVar = 42;<br>
+                    let booleanVar = true;<br>
+                    let arrayVar = [1, 2, 3];<br>
+                    let objectVar = {name: "John", age: 30};
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-functions"></i> Functions & Control Flow</h2>
+                
+                <div class="interactive-demo">
+                    <h3>Number Checker</h3>
+                    <div class="input-group">
+                        <label for="numberInput">Enter a number:</label>
+                        <input type="number" id="numberInput" placeholder="Enter a number">
+                    </div>
+                    <button class="btn" onclick="checkNumber()">Check Number</button>
+                    <div class="output" id="numberOutput">Result will appear here</div>
+                </div>
+                
+                <div class="code-example">
+                    // Function example<br>
+                    function checkNumber() {<br>
+                    &nbsp;&nbsp;let num = parseFloat(document.getElementById("numberInput").value);<br>
+                    &nbsp;&nbsp;let result = "";<br><br>
+                    
+                    &nbsp;&nbsp;if (num > 0) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;result = "The number is positive";<br>
+                    &nbsp;&nbsp;} else if (num < 0) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;result = "The number is negative";<br>
+                    &nbsp;&nbsp;} else {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;result = "The number is zero";<br>
+                    &nbsp;&nbsp;}<br><br>
+                    
+                    &nbsp;&nbsp;document.getElementById("numberOutput").textContent = result;<br>
+                    }
+                </div>
+            </section>
+        </div>
+        
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-cogs"></i> DOM Manipulation</h2>
+                
+                <div class="interactive-demo">
+                    <h3>Background Color Changer</h3>
+                    <div class="color-box" id="colorBox">This element changes color</div>
+                    <button class="btn" onclick="changeColor('lightcoral')">Red</button>
+                    <button class="btn" onclick="changeColor('lightblue')">Blue</button>
+                    <button class="btn" onclick="changeColor('lightgreen')">Green</button>
+                    <button class="btn" onclick="changeColor('lightyellow')">Yellow</button>
+                </div>
+                
+                <div class="code-example">
+                    // DOM manipulation example<br>
+                    function changeColor(color) {<br>
+                    &nbsp;&nbsp;document.getElementById("colorBox").style.backgroundColor = color;<br>
+                    }
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-tasks"></i> To-Do List</h2>
+                
+                <div class="interactive-demo">
+                    <h3>Simple To-Do App</h3>
+                    <div class="input-group">
+                        <label for="todoInput">Enter a task:</label>
+                        <input type="text" id="todoInput" placeholder="What needs to be done?">
+                    </div>
+                    <button class="btn" onclick="addTodo()">Add Task</button>
+                    <ul class="todo-list" id="todoList">
+                        <!-- Todo items will be added here -->
+                    </ul>
+                </div>
+                
+                <div class="code-example">
+                    // To-Do List functionality<br>
+                    function addTodo() {<br>
+                    &nbsp;&nbsp;let input = document.getElementById("todoInput");<br>
+                    &nbsp;&nbsp;let task = input.value.trim();<br><br>
+                    
+                    &nbsp;&nbsp;if (task !== "") {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;let li = document.createElement("li");<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;li.innerHTML = `${task} &lt;button onclick="removeTodo(this)"&gt;Delete&lt;/button&gt;`;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;document.getElementById("todoList").appendChild(li);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;input.value = "";<br>
+                    &nbsp;&nbsp;}<br>
+                    }<br><br>
+                    
+                    function removeTodo(button) {<br>
+                    &nbsp;&nbsp;button.parentElement.remove();<br>
+                    }
+                </div>
+            </section>
+        </div>
+        
+        <div class="content">
+            <section class="section">
+                <h2><i class="fas fa-clock"></i> Date & Time</h2>
+                
+                <div class="interactive-demo">
+                    <h3>Current Date & Time</h3>
+                    <button class="btn" onclick="showDateTime()">Show Current Date & Time</button>
+                    <div class="output" id="datetimeOutput">Click the button to see current date and time</div>
+                </div>
+                
+                <div class="code-example">
+                    // Date and Time example<br>
+                    function showDateTime() {<br>
+                    &nbsp;&nbsp;let now = new Date();<br>
+                    &nbsp;&nbsp;let options = { <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;weekday: 'long', year: 'numeric', month: 'long', <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;day: 'numeric', hour: '2-digit', minute: '2-digit' <br>
+                    &nbsp;&nbsp;};<br>
+                    &nbsp;&nbsp;let datetimeString = now.toLocaleDateString('en-US', options);<br>
+                    &nbsp;&nbsp;document.getElementById("datetimeOutput").textContent = datetimeString;<br>
+                    }
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2><i class="fas fa-sync-alt"></i> Event Listeners</h2>
+                
+                <div class="interactive-demo">
+                    <h3>Interactive Area</h3>
+                    <div class="input-group">
+                        <label for="eventInput">Type something:</label>
+                        <input type="text" id="eventInput" placeholder="Start typing...">
+                    </div>
+                    <div class="output" id="eventOutput">Your text will appear here as you type</div>
+                    
+                    <div style="margin-top: 20px;">
+                        <button class="btn" id="clickMe">Click Me</button>
+                        <div class="output" id="clickOutput">Button not clicked yet</div>
+                    </div>
+                </div>
+                
+                <div class="code-example">
+                    // Event listeners example<br>
+                    document.getElementById("eventInput").addEventListener("input", function() {<br>
+                    &nbsp;&nbsp;document.getElementById("eventOutput").textContent = this.value;<br>
+                    });<br><br>
+                    
+                    document.getElementById("clickMe").addEventListener("click", function() {<br>
+                    &nbsp;&nbsp;document.getElementById("clickOutput").textContent = "Button was clicked!";<br>
+                    });
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 JavaScript Interactive Examples. All rights reserved.</p>
+        <p>Practice JavaScript with these interactive examples</p>
+    </footer>
+
+    <script>
+        // Variables and Data Types
+        function showVariableType() {
+            let input = document.getElementById("varInput").value;
+            let output = document.getElementById("varOutput");
+            
+            if (input === "") {
+                output.textContent = "Please enter a value";
+                return;
+            }
+            
+            // Check if it's a number
+            if (!isNaN(input) && input.trim() !== "") {
+                output.textContent = `Data Type: Number (${parseFloat(input)})`;
+                return;
+            }
+            
+            // Check if it's a boolean
+            if (input.toLowerCase() === "true" || input.toLowerCase() === "false") {
+                output.textContent = `Data Type: Boolean (${input})`;
+                return;
+            }
+            
+            // Otherwise, treat as string
+            output.textContent = `Data Type: String ("${input}")`;
+        }
+        
+        // Functions and Control Flow
+        function checkNumber() {
+            let num = parseFloat(document.getElementById("numberInput").value);
+            let output = document.getElementById("numberOutput");
+            
+            if (isNaN(num)) {
+                output.textContent = "Please enter a valid number";
+                return;
+            }
+            
+            if (num > 0) {
+                output.textContent = "The number is positive";
+            } else if (num < 0) {
+                output.textContent = "The number is negative";
+            } else {
+                output.textContent = "The number is zero";
+            }
+        }
+        
+        // DOM Manipulation
+        function changeColor(color) {
+            document.getElementById("colorBox").style.backgroundColor = color;
+        }
+        
+        // To-Do List
+        function addTodo() {
+            let input = document.getElementById("todoInput");
+            let task = input.value.trim();
+            
+            if (task !== "") {
+                let li = document.createElement("li");
+                li.innerHTML = `${task} <button onclick="removeTodo(this)">Delete</button>`;
+                document.getElementById("todoList").appendChild(li);
+                input.value = "";
+            }
+        }
+        
+        function removeTodo(button) {
+            button.parentElement.remove();
+        }
+        
+        // Date and Time
+        function showDateTime() {
+            let now = new Date();
+            let options = { 
+                weekday: 'long', year: 'numeric', month: 'long', 
+                day: 'numeric', hour: '2-digit', minute: '2-digit' 
+            };
+            let datetimeString = now.toLocaleDateString('en-US', options);
+            document.getElementById("datetimeOutput").textContent = datetimeString;
+        }
+        
+        // Event Listeners (already in the HTML)
+        document.getElementById("eventInput").addEventListener("input", function() {
+            document.getElementById("eventOutput").textContent = this.value;
+        });
+        
+        document.getElementById("clickMe").addEventListener("click", function() {
+            document.getElementById("clickOutput").textContent = "Button was clicked!";
+        });
+    </script>
+</body>
+</html>
+```
+
+Features of this JavaScript Implementation:
+
+1. Interactive Examples: Practical demonstrations of JavaScript concepts
+2. Variables & Data Types: Shows how to work with different data types
+3. Functions & Control Flow: Demonstrates conditional logic
+4. DOM Manipulation: How to change page content dynamically
+5. To-Do List Application: A simple functional application
+6. Date & Time: Working with the JavaScript Date object
+7. Event Listeners: Responding to user interactions
+
+The page includes code examples alongside interactive demos, allowing you to see JavaScript in action. You can directly interact with each example to understand how the code works.
+
+Simply copy and paste this code into an HTML file and open it in any modern browser to explore the JavaScript examples!
